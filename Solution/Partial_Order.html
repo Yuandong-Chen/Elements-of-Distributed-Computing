@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>1. Show that if P and Q are posets defined on set X, then so is P&cap;Q.</p>
+    <p>Ans: P&cap;Q&sube;P, so property on irreflexive and transitive remains on intersection set.&nbsp;</p>
+    <p>2. Show that for all posets P on set X, there exists a total order Q on X such that P&sube;Q.</p>
+    <p>Ans: Things become hard when P is uncountable infinite. For different elements x, y in P, if they are comparable, we skipped it, otherwise, we random choose x &lt; y or y &lt; x, and update P. It becomes total order after adding uncountable relationship to P. But how could we add uncountable relationship to P? It is lazy computing, for example, whenever we choose different elements x, y from P, if they are incomparable, we just randomly choose x &lt; y or y &lt; x which makes any x, y from P comparable, so P becomes total order in the sense that choosing behavior is countable. The key part is why x &lt; y or y &lt; x relationship has no contradiction to the current poset P? If poset P has two incomparable different elements x and y, and adding relationship x &lt; y makes P not poset anymore, there must exists some path makes y loop back to x by &lt; relationship, which makes x, y comparable. Otherwise, P keeps transitive property.</p>
+    <p>3. Show that if C<sub>1</sub> and C<sub>2</sub> are down-sets for any poset (E, &lt;), then so is&nbsp;C<sub>1</sub>&cap;C<sub>2</sub>.</p>
+    <p>Ans:&nbsp;C<sub>1</sub>&cap;C<sub>2</sub>&sube;C<sub>1</sub></p>
+    <p>4. Consider the poset defined by the divides relations on the set of positive integers. Show that this poset is a lattice.</p>
+    <p>Ans: least common multiple is the lowest upper bound.</p>
+    <p>5. The transitive closure of a relaionship R on a finite set can also be defined as the smallest transitive relation on S that contains R. Show that the transitive closure is uniquely defined. We use "smaller" in the sense that R<sub>1</sub> is smaller that&nbsp;R<sub>2</sub> if |R<sub>1</sub>| &lt; |R<sub>2</sub>|.</p>
+    <p>Ans: Since R is finite, we only need to use O(N^2) time complexity algorithm to check every node pair (x, y) in the Hasse diagram if there is a path from x to y. If path exists, add (x, y) as new relationship. It is obvious enough that I leave out the proof.</p>
+  </body>
+</html>

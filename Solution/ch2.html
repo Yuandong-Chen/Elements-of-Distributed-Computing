@@ -6,7 +6,16 @@
   </head>
   <body>
     <p>2.1 Show that "concurrent with" is not a transitive relation.</p>
-    <p>2.2 Given a run in the happended before model that is consistent with the run in the potential causality model in Figure 2.6 and satisfies&nbsp;&not;(e<sub>2</sub>&rarr; f<sub>4</sub>).</p>
-    <p>2.3 Show that a deposet generates a valid happended before&nbsp;</p>
+<p>Ans: a || b, b || c, and a is not concurrent with c, iff path exists between a and c in happen-before diagram and this path does not include b point.</p>
+<p>2.2 Given a run in the happened before model that is consistent with the run in the potential causality model in Figure 2.6 and satisfies&nbsp;&not;(e<sub>2</sub>&rarr; f<sub>4</sub>).</p>
+<p>Ans: too easy to draw the diagram. just put e2 after e3 on local process P1.</p>
+<p>2.3 Show that a deposet generates a valid happended before diagram on events.</p>
+<p>Ans: (D3) assumption.</p>
+<p>2.4 Show that every deposet has at least one global sequence.</p>
+<p>Ans: we add one more virtual point happen before all initial event on every local process. Based on a total order exists for partial order, this total order is the global sequence.</p>
+<p>2.5 Consider a distributed computation modeled by a poset (E, &lt;) and let X be the set of all down-sets of (E, &lt;). A sequence of down-sets is called a global sequence of states if (1) it starts with the empty down-set, (2) every two successive down-sets in the sequence differ by exactly one event, and (3) it ends with the down-set E. Show that there is a one-to-one correspondence between the set of total orders consistent with (E, &lt;) and the set of global sequences.</p>
+<p>Ans: property (3) is the key part. How could we differ exactly one event in down-set? we have down-set P, its upper bound set is {e1, e2, ...}, we can only choose x in the upper bound set and add y &lt;im x in local process of x to P. we just mapping y&nbsp;&harr; P, y in total order is the next element in the sequence. How to map total order to global sequence? for every total order, we also have its down-set p, p&nbsp;&harr; P, P has the same events as p in happen-before diagram.&nbsp;</p>
+<p>2.6 In a potential causality model, events within a process may not be totally ordered. Given an efficient algorithm to decompose events of a process into a minimum number of tasks such that all events within a task are totally ordered.</p>
+<p>Ans: Within a process, the tasks number is the width (cardinality of maximum antichain of poset P). Use DFS or BFS is suffice. The state is only achieved by colored number of inorder times.</p>
   </body>
 </html>

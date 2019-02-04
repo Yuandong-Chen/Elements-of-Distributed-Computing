@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>3.1 Show that for any two distinct local states s and t, s↛t implies that there exists a logical clock C such that C(t) &lt; C(s).</p>
+<p>Ans: Hint: modify the proof of Lemma 3.3, easy to proof, we need to set X := {s, t}</p>
+<p>3.2 We discussed a method by which we can totoally order all events within a system. If two events have the same logical time, we broke the tie using process identitifers. Suggest a scheme that does not have this disadvantage. (Hint: Use the value of the logica clock in determinging the priority.)</p>
+<p>Ans: We have to know the total number of process first, and for process i, the clock in i must be the next closest value&nbsp;&equiv; i (mod N), partition idea.</p>
+<p>3.3 Assume that you are given traces of each process as sequences of vector times. Can you draw a "process-time" diagram using these traces? A process-time diagram shows receives and sends of all the messages in the computation.</p>
+<p>Ans: if y covers x, then we draw arrow from event x to event y. y could not cover mutiple events on other processes, because of interleaving assumption on happened-before model.&nbsp;</p>
+<p>3.4 Let there be two groups of processes in a distributed system, each with its own leader. Processes in different groups communicate with each other only through their leaders. How can this feature be exploited in construncting vector clocks?</p>
+<p>Ans: we could use log vector clock on leader process, so each process only need to keep its own counter and a tuple of two leader log index. (Saving memory usage)</p>
+<p>3.5 Prove the following for vector clocks: s &rarr; t iff</p>
+<p>(s.v[s.p] &lt;= t.v[s.p]) and (s.v[t.p] &lt; t.v[t.p]).</p>
+<p>Ans: s &rarr; t iff s.v &lt; t.v</p>
+<p>(s.v[s.p] &lt;= t.v[s.p]) and (s.v[t.p] &lt; t.v[t.p]) &rArr;&nbsp;s.v &lt; t.v</p>
+<p>s &rarr; t&nbsp;&rArr;&nbsp;s.v &lt; t.v&nbsp;&rArr; s.v[s.p] &lt;= t.v[s.p]</p>
+<p>since t&nbsp;↛ s, s.v[t.p] &lt; t.v[t.p].</p>
+<p>3.6 Suppose that the underlying communication system gurantees FIFO ordering of messages. How will you exploit this feature to reduce the communication complexity of the vector clock algorithm? Given an expression for overhead savings if your scheme is used instead of the traditional vector clock algorithm. Assume that any process can send at most m messages.</p>
+<p>Ans: Buffer and merge successive messages.</p>
+<p>3.7 Assume that you have implemented the vector clock algorithm. However, some application needs Lamport's logical clock. Write a function convert that takes as input a vector timestamp and outputs a logical clock timestamp.</p>
+<p>Ans: sum function</p>
+<p>3.8 Give a distributed algorithm to maintain clock for a distributed program that has a dynamic number of processes. Assume that there are the following events in the life of any process: start process, internal, send, receive, fork, join processid, terminate. It should be possible to infer the happened before relation using your clocks.</p>
+<p>Ans: Type VectorClock = List[Either[Int, VectorClock]]. using priority based on level. (VectorClock is a tree-like structure)</p>
+<p>3.9 Show that for all M there exists a computation (E, &rarr;) on M processes such that any mapping V from E to N<sup>k</sup> that satisfies</p>
+<p>&forall; e, f &isin; E: e &rarr; f&nbsp;&equiv; V(e) &lt; V(f)</p>
+<p>has k &gt;= M.</p>
+<p>Ans: k = M: it is solved and it is easy to add abundant number to construct larger dimension vector. We only need to prove that k &lt; M is impossible. For simplicity, suppose M = 2, it is obviously true. If k &lt; M is possible, then using&nbsp;infinite descent technique in Math, it is obvious.&nbsp;</p>
+  </body>
+</html>

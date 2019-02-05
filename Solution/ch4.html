@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>4.1 Explain why, in the proof of Lemma 4.4, the rank of a state s has been defined as the length of the longest chain from any initial state to s rather than the langth from the inital state in s.p to s.</p>
+<p>Ans: In order to guarantee the following property:</p>
+<p>a &rarr;<sub>k</sub>&nbsp;b &rArr; rank(a) &lt; rank(b), where k &gt;= 1</p>
+<p>4.2 Specify and prove properties of the following algorithm:</p>
+<p>For any inital state s:</p>
+<p>&nbsp; &nbsp; (&forall;i: i &ne;s.p: s.v[i] = 0) and (s.v[s.p] = 1)</p>
+<p>(s, send, t):</p>
+<p>&nbsp; &nbsp; t.v[t.p] := s.v[t.p] + 1;</p>
+<p>(s, internal, t):</p>
+<p>&nbsp; &nbsp; t.v[t.p] := s.v[t.p] + 1;</p>
+<p>(s, rcv(u), t):</p>
+<p>&nbsp; &nbsp; t.v := s.v;</p>
+<p>&nbsp; &nbsp; t.v[u.p] := max(u.v[u.p], s.v[u.p]);</p>
+<p>In the above algorithm, a message sent from the state s does not include the entire vector, s.v, but just the component for process s.p, i.e. s.v[s.p].</p>
+<p>Ans: a ↝ b&nbsp;&equiv; a.v[a.p] = b.v[a.p] and&nbsp;&forall;u &lt;<sub>im&nbsp;</sub>b, u.v[a.p] &lt; a.v[a.p] omit proof.</p>
+<p>&nbsp;</p>
+  </body>
+</html>

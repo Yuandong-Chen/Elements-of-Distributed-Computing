@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>5.1 Show the following property for direct-dependency clocks.</p>
+<p>&nbsp; &nbsp;&nbsp;&forall;j: j&nbsp;&ne; s.p: s.v[s.p] &gt; s.v[j],</p>
+<p>that is, every process has its own component bigger than everybody else's component in the vector.</p>
+<p>Ans: Initial: rank(s) = 0: s.v[s.p] = 1 &gt; 0 = s.v[j].</p>
+<p>Induction: rank(s) &gt; 0, u &lt;<sub>im</sub> s, u.v[s.p] = u.v[u.p] &gt; u.v[j] (on induction hypothesis and rank definition). On any cases, from u to s, just discussing possible transfer situation suffices the proof.</p>
+<p>5.2 Assume that a distributed program has used direct-dependency clocks to timestamp the set of local states. Given a global cut G of such a computation, a matrix G.M can be formed by using a direct-dependency vector of the state G[i] as the i<sup>th</sup> row of the matrix. We define G to be consistent if</p>
+<p>&nbsp; &nbsp;&nbsp;&forall;i, j: G[i] ↛ G[j]</p>
+<p>(1) How can you check given G.M, whether G is consistent or not?</p>
+<p>Ans: if G[i]&nbsp;&rarr; G[j], there exists u in process k, G[i]&nbsp;&rarr;&nbsp;u, u&nbsp;&rarr;<sub>d</sub>&nbsp;G[j], u could be set as G[k] &lt; u, otherwise j = k, and we process the same discuss recursively, so G[k]&nbsp;&rarr;<sub>d</sub>&nbsp;G[j]. Here we get:</p>
+<p>&exist;i, j: G[i]&nbsp;&rarr; G[j]&nbsp;&equiv;&nbsp;&exist;u, v:&nbsp;G[u]&nbsp;&rarr;<sub>d</sub>&nbsp;G[v]&nbsp;</p>
+<p>&equiv;&nbsp;&exist;x, y:&nbsp;G[x][x] &lt;=&nbsp;G[y][x]</p>
+<p>Comparison O(N^2) Times to ensure the global cut.</p>
+<p>(2) How will your answer change if G is not a global cut, but a cut defined on a proper subset of the processes?</p>
+<p>Ans: find all G[i] &rarr;<sub>d </sub>G[j] pair as directed connection in directed graph. Only those points not connected are valid subset cut.</p>
+<p>5.3 Let s.v be the vector clock for the local state s. Given N vectors one from each state, one can form a matrix to represent the cross product of the local states, which can be viewed as the global state. Give a suitable condition on the matrix for this global state to be consistent (see Problem 5.2).</p>
+<p>Ans: Same to 5.2(1)</p>
+<p>5.4 Show that for matrix clocks, the row corresponding to the index s.p is bigger than any other row in the matrix s.M for any state s.</p>
+<p>Ans: Easy induction, but we have intuition here. The s.p is what the process know, every transition, it update its own knowledge to maximum. so it always thinks itself smartest.</p>
+<p>5.5 Let two states s and s' on the same process be send-interval congruent if there is no message sent between them. Show that send-interval congruence is an equivalence relation and satisfies:</p>
+<p>&nbsp; &nbsp;&nbsp;&forall;u: u.p &ne;s.p: s&nbsp;&rarr; u&nbsp;&equiv; s'&nbsp;&rarr; u.</p>
+<p>Similarly, define receive-interval congruence. Show that the interval congruence is the intersection of send-interval and receive-interval congruence.</p>
+<p>Ans: Just draw it or use logic related to&nbsp;&rarr;<sub>d</sub></p>
+<p>5.6 Assume that states of processes are colored green, yellow, or blue. It is up to a process to define the color of its state. Design a distributed algorithm that detests whether there exists a blue state s and a green state t in the computation such that s&nbsp;&rarr; t. Make your algorithm as decentralized and as efficient as possible.</p>
+<p>Ans: First naive method, just appending append-only data to local state and whenever received message, check the log. Actually, we do not need append-only log, just a flag to check if pred has blue state. Since it is accumulate. we use direct-dependency clocks.</p>
+<p>5.7 Consider the vector clock algorithm in Figure 5.7.</p>
+<p>Show that it computes the pred function, i.e.,&nbsp;</p>
+<p>&nbsp; &nbsp; (j, V<sub>k</sub>[j]) = pred(k, V<sub>k</sub>[k]).j</p>
+<p>Hint: it is a simple version of matrix clock.</p>
+<p>5.8 Give a matrix clock algorithm to track causality of events on a subset of all processes in the system. For example, in Figure 5.6, we are tracking causality for events on processes P1 and P2, but not on P3.</p>
+<p>Ans: when P3 send to other Pj, Pj need to update j row up to the maximum of origin value and max of column value on P3. It is like column-max value is P3's vector. (Intuition, it at most know this much knowledge, because it does not update itself after sending)</p>
+<p>5.9 Assume that some of the states in a distributed computation are colored blue. All other states are colored white. Given two blue states s and t, we are interested in determining whether there exists a blue state u such that&nbsp;s&nbsp;&rarr; u and u&nbsp;&rarr; t. Give an algorithm to "timestamp" each state so that given two timestamps of blue states it can be determined whether there exists a blue state that lies between them.</p>
+<p>Ans: Based on knowledge seminating&nbsp;philosophy, when sending message, we have to encode the "all possible blue state up to here paths log" message to the destination. It is a naive algorithm needing large message storage if blue is large. But since the requirement only need us to prove at least 1 in the path. we could eliminate the path that longer than 2, so the message at most need O(N) space, where N is the number of process in addition to normal vector clock.</p>
+  </body>
+</html>
